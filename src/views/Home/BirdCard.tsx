@@ -11,6 +11,8 @@ interface Ave {
   familia: string;
   regiao: string;
   imagem?: string;
+  curiosidade?: string;
+  descricaoLonga?: string;
 }
 
 export const BirdCard = ({ ave }: { ave: Ave }) => {

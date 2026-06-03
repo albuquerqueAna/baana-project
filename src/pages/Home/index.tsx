@@ -7,9 +7,12 @@ import { BirdCard } from '../../views/Home/BirdCard';
 import { SearchBar } from '../../views/Home/SearchBar';
 import { aves } from '../../data/aves';
 import { ThemeToggle } from '../../components/ThemeToggle';
+import { TodaysPick } from '../../views/Home/TodaysPick';
 
 export const Home = () => {
   const [busca, setBusca] = useState('');
+
+  const aveDoDia = aves[0]; 
 
   const avesFiltradas = aves.filter(ave => 
     ave.nome.toLowerCase().includes(busca.toLowerCase()) ||
@@ -18,7 +21,7 @@ export const Home = () => {
 
   return (
     <Box 
-      sx={{ 
+        sx={{ 
         minHeight: '100vh', 
         bgcolor: 'background.default',
         color: 'text.primary',
@@ -26,7 +29,6 @@ export const Home = () => {
         transition: 'background-color 0.3s ease'
       }}
     >
-      {/* Botão de Dark Mode fixo no topo direito */}
       <Box sx={{ position: 'fixed', top: 24, right: 24, zIndex: 1100 }}>
         <ThemeToggle />
       </Box>
@@ -47,9 +49,18 @@ export const Home = () => {
       </Container>
 
       <Container maxWidth="lg">
+        
+        {!busca && aveDoDia && (
+          <TodaysPick ave={aveDoDia} />
+        )}
+
+        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3, color: 'text.primary' }}>
+          {busca ? 'Resultados da Busca' : 'Explore Outras Espécies'}
+        </Typography>
+
         <Grid container spacing={3}>
           {avesFiltradas.map(ave => (
-            <Grid key={ave.id} size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={ave.id} sx={{ display: 'flex', justifyContent: 'center' }}>
               <BirdCard ave={ave} />
             </Grid>
           ))}
