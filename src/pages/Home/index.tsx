@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { BirdCard } from './todaysPick';
-import { SearchBar } from './pesquisa';
-import { aves } from '../../../data/aves';
-import { ThemeToggle } from '../../../components/ThemeToggle';
+import { BirdCard } from '../../views/Home/BirdCard';
+import { SearchBar } from '../../views/Home/SearchBar';
+import { aves } from '../../data/aves';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 export const Home = () => {
   const [busca, setBusca] = useState('');

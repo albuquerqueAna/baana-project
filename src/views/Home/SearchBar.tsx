@@ -10,7 +10,7 @@ interface SearchBarProps {
 
 export const SearchBar = ({ value, onChange }: SearchBarProps) => {
   const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
+  // const isDark = theme.palette.mode === 'dark'; // Unused in original but kept for reference if needed
 
   return (
     <Box sx={{ maxWidth: 448, mx: 'auto' }}>
