@@ -1,6 +1,6 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
-import { useThemeContext } from '../ThemeContext';
+import { useThemeContext } from '../../ThemeContext';
 import { Icon } from '@iconify/react';
 
 export const ThemeToggle = () => {

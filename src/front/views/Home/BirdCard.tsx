@@ -4,20 +4,23 @@ import { EnvironmentOutlined } from '@ant-design/icons';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 interface Ave {
   id: number;
-  nome: string;
-  familia: string;
-  regiao: string;
-  imagem?: string;
-  curiosidade?: string;
-  descricaoLonga?: string;
+  name: string;
+  sciName: string;
+  status: string;
+  region: string[];
+  family: string;
+  order: string;
+  images: string[];
 }
 
 export const BirdCard = ({ ave }: { ave: Ave }) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === 'dark';
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -29,6 +32,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
     >
       <AntdCard
         hoverable
+        onClick={() => navigate(`/ave/${ave.id}`)}
         style={{
           height: '100%',
           borderRadius: '16px',
@@ -48,10 +52,10 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
               overflow: 'hidden',
             }}
           >
-            {ave.imagem ? (
+            {ave.images && ave.images.length > 0 ? (
               <img 
-                alt={ave.nome} 
-                src={ave.imagem} 
+                alt={ave.name} 
+                src={ave.images[0]} 
                 style={{
                   width: '100%',
                   height: '100%',
@@ -78,7 +82,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
               m: 0 
             }}
           >
-            {ave.nome}
+            {ave.name}
           </Typography>
           <Typography 
             variant="body2" 
@@ -89,7 +93,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
               m: 0 
             }}
           >
-            {ave.familia}
+            {ave.family}
           </Typography>
           <Box sx={{ mt: 1 }}>
             <Tag 
@@ -101,7 +105,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
                 border: `1px solid ${isDark ? '#475569' : '#e2e8f0'}`,
               }}
             >
-              {ave.regiao}
+              {ave.region?.[0] || 'Região Desconhecida'}
             </Tag>
           </Box>
         </Box>

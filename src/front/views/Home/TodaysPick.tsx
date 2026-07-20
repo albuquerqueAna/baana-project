@@ -38,10 +38,10 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
               bgcolor: isDark ? 'action.hover' : 'grey.100',
             }}
           >
-            {ave.imagem ? (
+            {ave.images && ave.images.length > 0 ? (
               <img
-                src={ave.imagem}
-                alt={ave.nome}
+                src={ave.images[0]}
+                alt={ave.name}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
             ) : (
@@ -69,19 +69,19 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
                 }}
               />
               <Typography variant="caption" sx={{ color: 'text.primary' }}>
-                Família: <i>{ave.familia}</i>
+                Família: <i>{ave.family}</i>
               </Typography>
             </Box>
 
             <Typography variant="h3" component="h2" sx={{ fontWeight: 800, color: 'text.primary', fontSize: { xs: '2rem', md: '2.5rem' } }}>
-              {ave.nome}
+              {ave.name}
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'text.primary', lineHeight: 1.7 }}>
-              {ave.descricaoLonga || "Uma espécie fascinante que encanta observadores de aves do mundo todo com seu comportamento único e plumagem exuberante."}
+               Uma espécie fascinante pertencente à ordem <strong>{ave.order || 'Não catalogada'}</strong>, habitualmente encontrada na região de <strong>{ave.region?.[0] || 'Diversas'}</strong>. Atualmente, seu status de conservação é classificado como: <em>{ave.status || 'Desconhecido'}</em>.
             </Typography>
 
-            {ave.curiosidade && (
+            {ave.sciName && (
               <Box
                 sx={{
                   mt: 2,
@@ -99,7 +99,7 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
                     Você sabia?
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'text.secondary', lineHeight: 1.6 }}>
-                    {ave.curiosidade}
+                    O nome científico desta espécie é <strong>{ave.sciName}</strong>.
                   </Typography>
                 </Box>
               </Box>
