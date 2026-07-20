@@ -28,7 +28,6 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
       }}
     >
       <Grid container spacing={4} sx={{ alignItems: 'center' }}>
-        {/* Lado Esquerdo: Imagem da Ave */}
         <Grid size={{ xs: 12, md: 5 }} component="div">
           <Box
             sx={{
@@ -55,10 +54,8 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
           </Box>
         </Grid>
 
-        {/* Lado Direito: Textos e Curiosidades */}
         <Grid size={{ xs: 12, md: 7 }}>
           <Box sx={{ height: '100%', display: "flex", flexDirection: "column", gap: 2 }}>
-            {/* Tag de Destaque */}
             <Box sx={{ mb: 2, display: "flex", gap: 1, alignItems: "center" }}>
               <Chip
                 icon={<StarOutlined style={{ color: '#eab308' }} />}
@@ -71,7 +68,7 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
                   border: 'none'
                 }}
               />
-              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+              <Typography variant="caption" sx={{ color: 'text.primary' }}>
                 Família: <i>{ave.familia}</i>
               </Typography>
             </Box>
@@ -80,7 +77,7 @@ export const TodaysPick = ({ ave }: TodaysPickProps) => {
               {ave.nome}
             </Typography>
 
-            <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.7 }}>
+            <Typography variant="body1" sx={{ color: 'text.primary', lineHeight: 1.7 }}>
               {ave.descricaoLonga || "Uma espécie fascinante que encanta observadores de aves do mundo todo com seu comportamento único e plumagem exuberante."}
             </Typography>
 
