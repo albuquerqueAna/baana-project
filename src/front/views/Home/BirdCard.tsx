@@ -3,6 +3,7 @@ import { Card as AntdCard, Tag } from 'antd';
 import { EnvironmentOutlined } from '@ant-design/icons';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import { Icon } from '@iconify/react';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,13 +46,13 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
           borderColor: theme.palette.background.lighter,
           transition: 'all 0.3s ease',
         }}
-        styles={{ body: { display: 'flex', flexDirection: 'column', flexGrow: 1 } }} 
+        styles={{ body: { display: 'flex', flexDirection: 'column', flexGrow: 1 } }}
         cover={
           <Box
             sx={{
-              height: 260, 
+              height: 260,
               width: '100%',
-              bgcolor: theme.palette.background.lighter,
+              bgcolor: theme.palette.grey[100],
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -59,32 +60,73 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
             }}
           >
             {ave.images && ave.images.length > 0 ? (
-              <img 
-                alt={ave.name} 
-                src={ave.images[0]} 
+              <img
+                alt={ave.name}
+                src={ave.images[0]}
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'center 30%', 
-                  transition: 'transform 0.3s ease',
+                  objectPosition: 'center 30%',
+                  transition: 'transform .3s ease',
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
+                onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
                 onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               />
             ) : (
-              <Typography variant="body2" sx={{ color: 'text.secondary', fontStyle: 'italic' }}>
-                Foto não disponível
-              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  pt: 5, 
+                  gap: 2,
+                  color: 'text.secondary',
+                  bgcolor: 'background.paper',
+                  height: '100%',
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: '50%',
+                    bgcolor: 'background.paper',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    boxShadow: 1,
+                  }}
+                >
+                  <Icon
+                    icon="mdi:image-off-outline"
+                    width={36}
+                    color={theme.palette.text.secondary}
+                  />
+                </Box>
+
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    textAlign: 'center',
+                    px: 3,
+                    maxWidth: 280,
+                  }}
+                >
+                  Ainda não há uma foto cadastrada para esta ave.
+                </Typography>
+              </Box>
             )}
           </Box>
         }
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, height: '100%' }}> 
-          <Typography 
-            variant="h6" 
-            sx={{ 
-              fontWeight: 'bold', 
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, height: '100%' }}>
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 'bold',
               color: 'text.primary',
               m: 0,
               lineHeight: 1.2
@@ -92,21 +134,21 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
           >
             {ave.name}
           </Typography>
-          <Typography 
-            variant="body2" 
-            sx={{ 
+          <Typography
+            variant="body2"
+            sx={{
               color: isDark ? 'success.light' : 'success.main',
               fontWeight: 500,
               fontStyle: 'italic',
-              m: 0 
+              m: 0
             }}
           >
             {ave.family || 'Família não informada'}
           </Typography>
-          
+
           <Box sx={{ mt: 'auto', pt: 2 }}>
-            <Tag 
-              icon={<EnvironmentOutlined />} 
+            <Tag
+              icon={<EnvironmentOutlined />}
               style={{
                 borderRadius: '6px',
                 backgroundColor: isDark ? '#334155' : '#f1f5f9',

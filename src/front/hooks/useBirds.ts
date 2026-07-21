@@ -1,32 +1,49 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Ave } from '../types/bird';
 import { fetchAves } from '../services/birdService';
 
 export const useBirds = (busca: string) => {
-  const [aves, setAves] = useState<Ave[]>([]);
+  const [todasAsAves, setTodasAsAves] = useState<Ave[]>([]); // Cache local
+  const [avesFiltradas, setAvesFiltradas] = useState<Ave[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadAves = useCallback(async () => {
+  const carregarDados = async () => {
     try {
       setLoading(true);
       setError(null);
-      const data = await fetchAves(busca);
-      setAves(data);
-    } catch (err) {
-      setError('Não foi possível carregar as aves. Verifique sua conexão.');
+      const data = await fetchAves(); 
+      setTodasAsAves(data);
+      setAvesFiltradas(data);
+    } catch (err: any) {
+      setError('Erro ao carregar a lista de aves. Verifique sua conexão.');
     } finally {
       setLoading(false);
     }
-  }, [busca]);
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      loadAves();
-    }, 500);
+    carregarDados();
+  }, []);
 
-    return () => clearTimeout(timer);
-  }, [busca, loadAves]);
+  useEffect(() => {
+    if (!busca.trim()) {
+      setAvesFiltradas(todasAsAves);
+    } else {
+      const termo = busca.toLowerCase();
+      const filtradas = todasAsAves.filter(ave => 
+        ave.name?.toLowerCase().includes(termo) || 
+        ave.family?.toLowerCase().includes(termo) ||
+        ave.sciName?.toLowerCase().includes(termo)
+      );
+      setAvesFiltradas(filtradas);
+    }
+  }, [busca, todasAsAves]);
 
-  return { aves, loading, error, refetch: loadAves };
+  return { 
+    aves: avesFiltradas, 
+    loading, 
+    error, 
+    refetch: carregarDados 
+  };
 };

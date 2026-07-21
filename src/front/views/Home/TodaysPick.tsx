@@ -93,7 +93,7 @@ export const TodaysPick = ({ ave }: { ave: Ave }) => {
                 />
               ) : (
                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-                  <Typography variant="body2" color="text.secondary">Foto não disponível</Typography>
+                  <Typography variant="body2" color="text.secondary">Não há imagens disponíveis.</Typography>
                 </Box>
               )}
             </Box>

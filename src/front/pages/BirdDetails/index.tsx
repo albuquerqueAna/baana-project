@@ -179,7 +179,7 @@ export const BirdDetails = () => {
                     ) : (
                       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                         <Typography variant="body2" sx={{ fontStyle: 'italic', color: 'text.secondary' }}>
-                          Foto não disponível
+                          Não há imagens disponíveis.
                         </Typography>
                       </Box>
                     )}
