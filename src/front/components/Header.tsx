@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import { Icon } from '@iconify/react'; // <-- NOVO IMPORT
 import { ThemeToggle } from './ThemeToggle';
+import { Tooltip } from 'antd';
 
 export const Header = () => {
     const theme = useTheme();
@@ -57,17 +58,19 @@ export const Header = () => {
 
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
                     <ThemeToggle />
-                    <Button
-                        variant="outlined"
-                        startIcon={<Icon icon="lucide:user" />}
-                        sx={{
-                            borderRadius: '8px',
-                            textTransform: 'none',
-                            fontWeight: 'bold'
-                        }}
-                    >
-                        Login
-                    </Button>
+                    <Tooltip title="Em breve!!!" arrow>
+                        <Button
+                            variant="outlined"
+                            startIcon={<Icon icon="lucide:user" />}
+                            sx={{
+                                borderRadius: '8px',
+                                textTransform: 'none',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Login
+                        </Button>
+                    </Tooltip>
                 </Box>
             </Container>
         </Box>
