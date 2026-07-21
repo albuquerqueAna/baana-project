@@ -24,6 +24,12 @@ export const fetchAves = async (busca?: string): Promise<Ave[]> => {
     );
   }
 
+  aves.sort((a, b) => {
+    const aTemImagem = a.images && a.images.length > 0 ? 1 : 0;
+    const bTemImagem = b.images && b.images.length > 0 ? 1 : 0;
+    return bTemImagem - aTemImagem;
+  });
+
   return aves;
 };
 

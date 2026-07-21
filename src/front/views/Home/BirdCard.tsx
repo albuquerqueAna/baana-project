@@ -29,22 +29,29 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
+      style={{ height: '100%', width: '100%' }} /* <-- O SEGREDO 1: A animação agora estica 100% */
     >
       <AntdCard
-        hoverable
         onClick={() => navigate(`/ave/${ave.id}`)}
+        hoverable
         style={{
           height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
           borderRadius: '16px',
           overflow: 'hidden',
           backgroundColor: theme.palette.background.paper,
           borderColor: theme.palette.background.lighter,
           transition: 'all 0.3s ease',
         }}
+        /* <-- O SEGREDO 2: Força o corpo do card a ocupar o espaço restante */
+        styles={{ body: { display: 'flex', flexDirection: 'column', flexGrow: 1 } }} 
         cover={
           <Box
             sx={{
               height: 192,
+              width: '100%',
               bgcolor: theme.palette.background.lighter,
               display: 'flex',
               alignItems: 'center',
@@ -73,13 +80,15 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
           </Box>
         }
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+        {/* O SEGREDO 3: height 100% aqui para o mt: 'auto' funcionar */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, height: '100%' }}> 
           <Typography 
             variant="h6" 
             sx={{ 
               fontWeight: 'bold', 
               color: 'text.primary',
-              m: 0 
+              m: 0,
+              lineHeight: 1.2
             }}
           >
             {ave.name}
@@ -93,9 +102,11 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
               m: 0 
             }}
           >
-            {ave.family}
+            {ave.family || 'Família não informada'}
           </Typography>
-          <Box sx={{ mt: 1 }}>
+          
+          {/* O SEGREDO 4: mt: 'auto' empurra a tag lá para o fundo do card! */}
+          <Box sx={{ mt: 'auto', pt: 2 }}>
             <Tag 
               icon={<EnvironmentOutlined />} 
               style={{
