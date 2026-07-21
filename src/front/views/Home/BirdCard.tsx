@@ -29,7 +29,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3 }}
-      style={{ height: '100%', width: '100%' }} /* <-- O SEGREDO 1: A animação agora estica 100% */
+      style={{ height: '100%', width: '100%' }}
     >
       <AntdCard
         onClick={() => navigate(`/ave/${ave.id}`)}
@@ -45,12 +45,11 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
           borderColor: theme.palette.background.lighter,
           transition: 'all 0.3s ease',
         }}
-        /* <-- O SEGREDO 2: Força o corpo do card a ocupar o espaço restante */
         styles={{ body: { display: 'flex', flexDirection: 'column', flexGrow: 1 } }} 
         cover={
           <Box
             sx={{
-              height: 192,
+              height: 260, 
               width: '100%',
               bgcolor: theme.palette.background.lighter,
               display: 'flex',
@@ -67,6 +66,7 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
+                  objectPosition: 'center 30%', 
                   transition: 'transform 0.3s ease',
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
@@ -80,7 +80,6 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
           </Box>
         }
       >
-        {/* O SEGREDO 3: height 100% aqui para o mt: 'auto' funcionar */}
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, height: '100%' }}> 
           <Typography 
             variant="h6" 
@@ -105,7 +104,6 @@ export const BirdCard = ({ ave }: { ave: Ave }) => {
             {ave.family || 'Família não informada'}
           </Typography>
           
-          {/* O SEGREDO 4: mt: 'auto' empurra a tag lá para o fundo do card! */}
           <Box sx={{ mt: 'auto', pt: 2 }}>
             <Tag 
               icon={<EnvironmentOutlined />} 

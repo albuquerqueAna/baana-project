@@ -4,7 +4,7 @@ import { Ave } from '../types/bird';
 const nuthatchApi = axios.create({
   baseURL: 'https://nuthatch.lastelm.software',
   headers: {
-    'api-key': '9e1d51f1-08a0-4c2d-92d8-6829e933655b',
+    'api-key': '9e1d51f1-08a0-4c2d-92d8-6829e933655b', 
   },
   timeout: 15000,
 });
@@ -17,10 +17,12 @@ export const fetchAves = async (busca?: string): Promise<Ave[]> => {
     : (response.data?.entities || []);
 
   if (busca) {
+    //conducoes de busca
     const termo = busca.toLowerCase();
     aves = aves.filter(ave => 
       ave.name?.toLowerCase().includes(termo) || 
-      ave.family?.toLowerCase().includes(termo)
+      ave.family?.toLowerCase().includes(termo) ||
+      ave.sciName?.toLowerCase().includes(termo)
     );
   }
 
