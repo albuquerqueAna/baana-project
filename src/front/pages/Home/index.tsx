@@ -12,35 +12,28 @@ import { ReloadOutlined } from '@ant-design/icons'; // Ícone novo
 import { BirdCard } from '../../views/Home/BirdCard';
 import { SearchBar } from '../../views/Home/SearchBar';
 import { TodaysPick } from '../../views/Home/TodaysPick';
-import { Header } from '../../components/Header';
-import { Footer } from '../../components/Footer';
 import { useBirds } from '../../hooks/useBirds';
 
 export const Home = () => {
   const [busca, setBusca] = useState('');
   
-  // NOVO: Controle de quantos itens exibir (Paginação Front-end)
   const QTD_POR_PAGINA = 12;
   const [itensVisiveis, setItensVisiveis] = useState(QTD_POR_PAGINA);
 
   const { aves, loading, error, refetch } = useBirds(busca);
   const aveDoDia = aves?.find((ave) => ave.id === 89);
 
-  // NOVO: Função chamada ao digitar na barra de pesquisa
   const handleBusca = (valor: string) => {
     setBusca(valor);
-    setItensVisiveis(QTD_POR_PAGINA); // Reseta a paginação ao fazer uma nova busca
+    setItensVisiveis(QTD_POR_PAGINA); 
   };
 
-  // NOVO: Função para o botão Carregar Mais
   const handleCarregarMais = () => {
     setItensVisiveis(prev => prev + QTD_POR_PAGINA);
   };
 
-  // Pega apenas as aves que cabem na página atual
   const avesPaginadas = aves?.slice(0, itensVisiveis) || [];
   
-  // Verifica se ainda tem mais aves pra mostrar
   const temMaisAves = aves?.length > itensVisiveis;
 
   return (
@@ -54,11 +47,9 @@ export const Home = () => {
         flexDirection: 'column'
       }}
     >
-      <Header />
 
       <Box sx={{ flexGrow: 1, p: { xs: 2, md: 4 } }}>
         <Container maxWidth="md" sx={{ textAlign: 'center', mb: 8, mt: 4 }}>
-          {/* Atualizado para usar a nova função que reseta a página */}
           <SearchBar value={busca} onChange={handleBusca} />
         </Container>
 
@@ -93,7 +84,6 @@ export const Home = () => {
             ) : (
               <>
                 <Grid container spacing={3}>
-                  {/* Usa a lista fatiada (paginada) em vez da completa */}
                   {avesPaginadas.map((ave) => (
                     <Grid size={{ xs: 12, sm: 6, md: 4 }} key={ave.id} sx={{ display: 'flex' }}>
                       <BirdCard ave={ave} />
@@ -101,7 +91,6 @@ export const Home = () => {
                   ))}
                 </Grid>
 
-                {/* BOTÃO CARREGAR MAIS */}
                 {temMaisAves && (
                   <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
                     <Button 
@@ -129,7 +118,6 @@ export const Home = () => {
         </Container>
       </Box>
 
-      <Footer />
     </Box>
   );
 };
